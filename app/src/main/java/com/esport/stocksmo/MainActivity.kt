@@ -1,14 +1,30 @@
-package com.esport.stocksmo;
+package com.esport.stocksmo
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startForegroundService
+import com.google.android.gms.ads.AdService
 
-import android.os.Bundle;
+class MainActivity : AppCompatActivity() {
 
-public class MainActivity extends AppCompatActivity {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        checkAccessibilityPermission()
+
+    }
+
+    private fun checkAccessibilityPermission() {
+        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+        startActivity(intent)
+        Toast.makeText(this, "Enable Accessibility Service for the app", Toast.LENGTH_LONG).show()
     }
 }
